@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MySql.Data.MySqlClient;
 
 namespace Solder.Net
 {
@@ -25,7 +26,13 @@ namespace Solder.Net
         {
             services.AddControllersWithViews();
             services.AddTransient(
-                x => new Database(""));
+                x => new Database(new MySqlConnectionStringBuilder
+                {
+                    Server = Configuration["MySQL:IP"],
+                    Database = Configuration["MySQL:Database"],
+                    UserID = Configuration["MySQL:Username"],
+                    Password = Configuration["MySQL:Password"]
+                }.ToString()));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

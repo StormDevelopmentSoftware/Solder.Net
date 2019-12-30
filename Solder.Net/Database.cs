@@ -15,7 +15,7 @@ namespace Solder.Net
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            Connection.DisposeAsync();
         }
     }
 }

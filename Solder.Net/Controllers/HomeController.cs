@@ -11,17 +11,14 @@ namespace Solder.Net.Controllers
 {
     public class HomeController : Controller
     {
-        private Database Database { get; set; }
-        public HomeController(Database db)
-        {
-            Database = db;
-        }
-
+        private Database _database { get; set; }
+        
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, Database database)
         {
             _logger = logger;
+            _database = database;
         }
 
         public IActionResult Index()
